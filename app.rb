@@ -10,7 +10,7 @@ get 'favorites' do
   File.read('data.json')
 end
 
-get '/favorites' do
+post '/favorites' do
   file = JSON.parse(File.read('data.json'))
   unless params[:name] && params[:oid]
     return 'Invalid Request'
