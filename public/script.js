@@ -13,7 +13,8 @@ function performMovieSearch() {
   // To support movie titles with multiple words,
   // replace whitespaces with `+` to work with the request formatting of OMDb API
   query = movieName.value.split(' ').join('+');
-  url = "http://www.omdbapi.com/?apikey="+ apiKey + "&" + "s=" + query;
+  apiKeyDetails = "apikey=" + apiKey + "&";
+  url = "http://www.omdbapi.com/?" + apiKeyDetails + "s=" + query;
 
   // make an external GET request to OMDb
   xhr = new XMLHttpRequest();
@@ -23,10 +24,10 @@ function performMovieSearch() {
   xhr.onreadystatechange = processRequest;
 }
 
-// ADD ERROR HANDLING HERE
+// TO DO: Add error handling for this external API request
 function processRequest(e) {
-  // readyState 4 means the request is complete
-  if (xhr.readyState == 4) {
+  // readyState 4 means the request is complete, status 200 means the request was successful
+  if (xhr.readyState == 4 && xhr.status == 200) {
     // Parse the JSON response here so we can more easily see the data that comes back from OMDb
     response = JSON.parse(xhr.responseText);
 
@@ -59,10 +60,12 @@ function handleFavoriteClickEvent(params) {
   xhr.onreadystatechange = processFavoriteRequest;
 }
 
+// TO DO: Add error handling for this request
 function processFavoriteRequest(e) {
-  if (xhr.readyState == 4) {
+  // readyState 4 means the request is complete, status 200 means the request was successful
+  if (xhr.readyState == 4 && xhr.status == 200) {
     // Parse the JSON response here so we can more easily see the data that comes back from OMDb
     var response = JSON.parse(xhr.responseText);
-    alert("Congrats, You've favorited " + response["title"] + "!!");
+    alert("Congrats, You've favorited " + response["title"] + "!");
   }
 }
