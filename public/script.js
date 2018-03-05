@@ -14,7 +14,7 @@ function performMovieSearch() {
   // replace whitespaces with `+` to work with the request formatting of OMDb API
   query = movieName.value.split(' ').join('+');
   apiKeyDetails = "apikey=" + apiKey + "&";
-  url = "http://www.omdbapi.com/?" + apiKeyDetails + "s=" + query;
+  url = "https://www.omdbapi.com/?" + apiKeyDetails + "s=" + query;
 
   // make an external GET request to OMDb
   xhr = new XMLHttpRequest();
