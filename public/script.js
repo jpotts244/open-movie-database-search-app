@@ -36,16 +36,18 @@ function processRequest(e) {
     for (var i = 0; i < response["Search"].length; i++) {
       movieObject = response["Search"][i];
       var title = movieObject["Title"];
-      
-      displayData.innerHTML += "<div>" + "<h3>" + title + "</h3>" + "<button onclick=handleFavoriteClickEvent({title:response['Search'][" + i + "]['Title'],oid:response['Search'][" + i + "]['imdbID']})>Favorite?</button>" + "</div>" + "</br>";
-      // displayMovieDetails(response["Search"][i]);
+
+      // TO DO: display logic needs to be refactored to be easier to maintain and read
+      displayData.innerHTML +=
+        "<div>" + "<h3>" + title + "</h3>" + "<button onclick=handleFavoriteClickEvent({title:response['Search'][" + i + "]['Title'],oid:response['Search'][" + i + "]['imdbID']})>Favorite?</button>" + "</div>" + "</br>";
+      displayMovieDetails(response["Search"][i]);
     }
   }
 }
 
 function displayMovieDetails(movie) {
   var movieDetails = document.getElementById("movie-details");
-  movieDetails.innerHTML += "<div>" + movie["Title"] + " " + movie["Year"] + "</div>" + "</br>"
+  movieDetails.innerHTML += "<div>" + "<strong>Title:</strong> "+ movie["Title"] + " <strong>Year:</strong> " + movie["Year"] + "</div>" + "</br>"
 }
 
 function handleFavoriteClickEvent(params) {
